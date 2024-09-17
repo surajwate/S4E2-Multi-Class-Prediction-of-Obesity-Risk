@@ -24,7 +24,7 @@ base_models = [
 ]
 
 # Meta model
-meta_model = LogisticRegression()
+meta_model = XGBClassifier()
 
 # Define the stacking classifier
 stacking_model = StackingClassifier(estimators=base_models, final_estimator=meta_model)
@@ -42,5 +42,9 @@ models = {
     "bagging": BaggingClassifier(),
     "lightgbm": LGBMClassifier(),
     "catboost": CatBoostClassifier(verbose=0),
-    "stacking": stacking_model
+    "stacking": stacking_model,
+    "xgboost_sg1": XGBClassifier(subsample=0.8, n_estimators=300, max_depth=3, learning_rate=0.1, colsample_bytree=1.0),
+    "xgboost_sg": XGBClassifier(subsample=0.9, reg_lambda=0.3333333333333333, reg_alpha=0.0, n_estimators=340, min_child_weight=3, max_depth=3, learning_rate=0.12666666666666668, gamma=0.3333333333333333, colsample_bytree=0.9),
+    "xgboost_sg_f": XGBClassifier(subsample=0.7, reg_lambda=0.333, reg_alpha=0.222, n_estimators=330, min_child_weight=5, max_depth=3, learning_rate=0.127, gamma=0.333, colsample_bytree=0.9),
+
 }
